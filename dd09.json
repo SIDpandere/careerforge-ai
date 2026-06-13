@@ -1,0 +1,3376 @@
+{
+  "name": "dd09",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "ENTRY  &  INTENT ROUTING\nWebhook → Read_Message → Check_PDF\n→ Detect_Intent_Agent  [Groq llama-3.3-70b  t=0.1]\n→ Resolve_Intent → Route_Intent  [Switch / 18 outputs]",
+        "height": 340,
+        "width": 1630,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1808,
+        512
+      ],
+      "id": "493f8e1f-7186-48bc-b1ce-ec7101da6cac",
+      "name": "BG_ENTRY"
+    },
+    {
+      "parameters": {
+        "content": "JOB SEARCH\nExtract Params  →  Apify LinkedIn + Apify Naukri  [parallel]\n→ Merge → Deduplicate → Score_Rank\n→ Format_Jobs  [Agent / Groq llama-3.3-70b  t=0.7]",
+        "height": 490,
+        "width": 2110
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "57a9c3e8-75ac-414e-9e1b-a5e0cdef4453",
+      "name": "BG_JOB_SEARCH"
+    },
+    {
+      "parameters": {
+        "content": "RESUME BUILDER\nWait_Resume → Resume_Agent  [Mistral leanstral-2603]\n→ DOCX_Export  [Code]  →  Set_Output",
+        "height": 330,
+        "width": 1120
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        496
+      ],
+      "id": "6693399b-d4fd-415b-a3cc-238b32fe20b2",
+      "name": "BG_RESUME"
+    },
+    {
+      "parameters": {
+        "content": "SKILL GAP  —  SkillGap_Agent  [Mistral mistral-large  t=default]\nOutput: match % | missing skills | certs | 90-day roadmap",
+        "height": 210,
+        "width": 920
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        880
+      ],
+      "id": "6d561bca-0500-43bc-9352-7a269a20c273",
+      "name": "BG_SKILLGAP"
+    },
+    {
+      "parameters": {
+        "content": "WRITING AGENTS\nApplication_Agent   [Groq llama-3.1-8b  t=0.8]  —  cover letter | app email | follow-up\nInterview_Agent     [Groq llama-3.3-70b  t=0.4]  —  15 Q&As + STAR format\nOutreach_Agent      [Groq llama-3.3-70b  t=0.9]  —  cold email | LinkedIn | referral  ★MERGED",
+        "height": 1230,
+        "width": 1740,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1168
+      ],
+      "id": "c24c8370-1be3-4f17-9801-ad03066960a3",
+      "name": "BG_WRITING_1"
+    },
+    {
+      "parameters": {
+        "content": "OUTREACH & APPLICATION\nSalary_Agent    [Groq llama-3.3-70b  t=0.4]  —  salary ranges | negotiation script\nLinkedIn_Agent  [Groq llama-3.1-8b   t=0.8]  —  headline | about | bullets | SSI\nApply_Agent     [Groq llama-3.1-8b   t=0.8]  —  full application materials",
+        "height": 1130,
+        "width": 1740,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        2464
+      ],
+      "id": "e13f2a14-268c-4208-b6ba-607f4cba716f",
+      "name": "BG_WRITING_2"
+    },
+    {
+      "parameters": {
+        "content": "TRACKER  —  Tracker_Webhook [HTTP] → Format_Tracker [Code]",
+        "height": 200,
+        "width": 820,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        3712
+      ],
+      "id": "5168a8c2-a6b6-4522-a86f-909a35e3a68a",
+      "name": "BG_TRACKER"
+    },
+    {
+      "parameters": {
+        "content": "ANALYTICS & SCORING\nGeneral_Agent      [Groq llama-3.3-70b  t=0.9]  —  catch-all career Q&A\nDashboard_Agent    [Mistral leanstral   t=—  ]  —  7-score health card | 30-day plan\nMatchScore_Agent   [Groq llama-3.3-70b  t=0.6]  —  job match % | hiring prob  ★MERGED",
+        "height": 1020,
+        "width": 820,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        4112
+      ],
+      "id": "224beef8-8d6a-48a9-9c0a-412409103b5e",
+      "name": "BG_ANALYTICS"
+    },
+    {
+      "parameters": {
+        "content": "OUTPUT FUNNEL\nAll agents  →  Set_Output  [Set]\n→  Respond to Webhook  [RespondToWebhook]\nReturns JSON to caller",
+        "height": 220,
+        "width": 760,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3200,
+        5168
+      ],
+      "id": "ecba91dd-cdc8-4b82-9667-a9de877d2433",
+      "name": "BG_OUTPUT"
+    },
+    {
+      "parameters": {
+        "content": "GITHUB PORTFOLIO  ★ PARALLEL API\nCheck_Has_GitHub_URL  ──┬──▶  GitHub_Profile_API  [HTTP]\n                        └──▶  GitHub_Repos_API    [HTTP]\nBoth  →  Prepare_GitHub_Data  →  GitHub_Agent  [Groq llama-3.3-70b  t=0.7]",
+        "height": 460,
+        "width": 1740,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        5584
+      ],
+      "id": "1e6451f4-145d-40b9-b61e-11dbfe58b7b2",
+      "name": "BG_GITHUB"
+    },
+    {
+      "parameters": {
+        "content": "INTERVIEW PREP & RESEARCH\nMockInterview_Agent      [Mistral leanstral-2603]  —  10-Q simulator | per-answer scoring\nResumeOptimise_Agent     [Mistral leanstral-2603]  —  ATS audit | keyword injection | full rewrite  ★MERGED\nCompanyResearch_Agent    [Mistral ministral-3b ]  —  company intel | interview process | culture\nWait_NetworkingMsg       →  Outreach_Agent  (see Writing section)",
+        "height": 1920,
+        "width": 900,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        6112
+      ],
+      "id": "63e9d32f-a8e1-4e5b-8fc8-c6c42818af4c",
+      "name": "BG_PREP"
+    },
+    {
+      "parameters": {
+        "content": "ADVANCED PLANNING\nOfferCompare_Agent  [Groq llama-3.3-70b  t=0.9]  —  financial table | growth | verdict  \nCareerPivot_Agent   [Mistral small-2506 ]  —  6-month pivot roadmap | skill gap\nJobSprint_Agent     [Mistral small-2506 ]  —  30-day sprint plan | job board tiers\nMemory_Shared  [Window=5]  —  shared across all 19 agents",
+        "height": 1340,
+        "width": 900,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        8112
+      ],
+      "id": "6cec1461-b9eb-4998-94d1-a6d15e9cc764",
+      "name": "BG_ADVANCED"
+    },
+    {
+      "parameters": {
+        "content": "CAREERFORGE AI  —  NODE LEGEND\n\n🟨 Yellow  Job Search Pipeline\n🟧 Orange  Writing & Outreach\n🟩 Green   Entry & Intent Routing\n🟦 Blue    Analytics & Scoring\n🟪 Purple  Profile & Research\n🟥 Red     Advanced Planning\n\nNODE TYPES\n  Agent      AI reasoning\n  LLM        Groq / Mistral model\n  Memory     Shared session buffer\n  Wait       Async resume point\n  Switch     Intent router (18 out)\n  Code       Data transform\n  HTTP       External API call\n  Apify      Web scraper\n\nv4: 15 agents | 1 memory | 16 waits",
+        "height": 600,
+        "width": 480,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2560,
+        512
+      ],
+      "id": "7c17d69d-ef53-4e5e-baf0-08cfbb75e0e4",
+      "name": "LEGEND"
+    },
+    {
+      "parameters": {
+        "content": "OPTIMISATION LOG  v1 → v2\n\nAGENTS       23 → 19  (−4 merged)\nMEMORY       22 → 1   (shared)\nCTX WINDOW   30 → 5   (−83% tokens)\nSWITCH RULES 22 → 16  (deduped + unused removed)\n\nMERGES\n  HiringProb + JobMatch    → MatchScore_Agent\n  ATSInject + ResumeTailor → ResumeOptimise_Agent\n  ColdEmail + Networking   → Outreach_Agent\n  CoverLetter + Apply      → Application_Agent\n\nPARALLEL\n  GitHub Profile API  ──┬▶ Prepare_GitHub_Data\n  GitHub Repos API    ──┘",
+        "height": 560,
+        "width": 480,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2560,
+        1120
+      ],
+      "id": "37b0dd7b-0d12-4ee7-be68-69edb4be5daf",
+      "name": "OPT_LOG"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Read_Message').first().json.sessionId }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        9120
+      ],
+      "id": "c472d414-1589-4642-b20d-1fed3d25cfd4",
+      "name": "Memory_Shared"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Job Search Sprint Coach for India 2025-2026.\n\nGenerate a personalized 30-day job search action plan immediately.\nUse any context already shared (resume, role, location, skills).\nIf no context, generate for a fresher data analyst in Pune.\n\n━━━ 30-DAY JOB SEARCH SPRINT PLAN ━━━\nTarget Role: [role]\nLocation: [city]\nStart date: Today\nGoal: First offer by Day 30\n\n━━━ 30-DAY PLAN ━━━\nWeek 1 Foundation | Week 2 Apply | Week 3 Network | Week 4 Interview+Close\nDaily non-negotiables, job board tiers, and 10 role-specific keywords.\nNo emoji.\nMEMORY RULE: Never ask for info already provided."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        8960
+      ],
+      "id": "81d1f89f-eefc-478f-bc33-7aa4532854aa",
+      "name": "JobSprint_Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Career Transition Coach for India 2025-2026.\n\nIf current role/target role not clear, ask for both.\n\nOutput IMMEDIATELY:\n\n━━━ CAREER PIVOT ANALYSIS ━━━\nFrom: [current] | To: [target]\nDifficulty: Easy/Moderate/Hard | Timeline: [X months]\n\n━━━ TRANSFERABLE SKILLS ━━━\n[list with relevance %]\n\n━━━ SKILL GAP ━━━\nCritical: [list] | Nice-to-have: [list] | Drop: [list]\n\n━━━ ROADMAP ━━━\nMonth 1-6: [weekly tasks per month]\n\n━━━ RESUME PIVOT ━━━\nSummary rewrite | Highlight | Downplay | 3 projects\n\n━━━ SALARY ━━━\nStarting after pivot | Time to reach previous level\n\n━━━ COMPANIES ━━━\n5 companies that hire switchers\n\n━━━ SUCCESS STORIES ━━━\n2-3 common pivot paths\n\nNo emoji. MEMORY RULE: Never ask for info already provided."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        8560
+      ],
+      "id": "a593729b-8776-4b80-a671-0b820bc41ee6",
+      "name": "CareerPivot_Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Offer Comparison Analyst for India 2025-2026.\n\nIf offers not provided, ask for both.\n\nOutput IMMEDIATELY:\n\n━━━ OFFER COMPARISON ━━━\nOffer 1: [Company|Role|City] | Offer 2: [Company|Role|City]\n\n━━━ FINANCIAL TABLE ━━━\nCTC | In-hand/mo | Variable % | Joining bonus | Yr-2 CTC\n\n━━━ CAREER GROWTH TABLE ━━━\nType | Brand | Tech stack | Learning | Promotion | WLB (each X/10)\n\n━━━ RISK ━━━\nOffer 1 risks | Offer 2 risks\n\n━━━ VERDICT ━━━\nRecommended: OFFER [1/2] | 3 reasons | Negotiation lever\n\n━━━ NEGOTIATION SCRIPT ━━━\n[Exact words to use]\n\nNo emoji. MEMORY RULE: Never ask for info already provided."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        8160
+      ],
+      "id": "ac5a65ca-76ee-4324-9410-a146621d64cb",
+      "name": "OfferCompare_Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {
+          "temperature": 0.9
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        368,
+        8320
+      ],
+      "id": "02c852e7-6fcd-4e01-a942-f48593547b3b",
+      "name": "Groq_OfferCompare",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "groqApi": {
+          "id": "hXNP9BU8BnyvGuQb",
+          "name": "Groq account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Company Intelligence Analyst for India 2025-2026.\n\nIf no company named, ask.\n\nOutput IMMEDIATELY:\n\n━━━ COMPANY INTELLIGENCE ━━━\n[Company] | [Sector] | [Size] | [HQ] | India presence\n\n━━━ OVERVIEW ━━━\nWhat they do | Known for\n\n━━━ INTERVIEW INTELLIGENCE ━━━\nProcess rounds | Difficulty | Technical focus | HR focus | Timeline\n\n━━━ SALARY (India 2025) ━━━\nFresher | 1-2yr | Senior | Negotiation room %\n\n━━━ CULTURE ━━━\nWork culture | WLB rating | Growth | Remote policy\n\n━━━ FLAGS ━━━\nRed flags | Green flags\n\n━━━ YOUR PITCH ━━━\n\"Why [company]?\" → [3-4 sentence exact answer]\n\n━━━ QUESTIONS TO ASK ━━━\n3 smart questions showing research\n\nNo emoji. MEMORY RULE: Never ask for info already provided."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        6960
+      ],
+      "id": "f828bf95-92a0-47d4-a65b-e16242b11855",
+      "name": "CompanyResearch_Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Mock Interview Simulator for India 2025-2026.\n\nCheck history. If fresh start: ask role (default: Data Analyst). Start Q1 once confirmed.\nAfter each answer: evaluate then next Q.\n\nPer Q: ━━━ QUESTION [N]/10 ━━━ | Type | Optional hint\nPer eval: Score X/10 | Well | Improve | Ideal structure\n\nMix: Q1-3 Technical, Q4-5 Case, Q6-7 Behavioral, Q8-9 HR, Q10 Salary/Goals\n\nAfter Q10:\n━━━ COMPLETE ━━━\nOverall X/100 | Strongest | Weakest | Top 3 to practice\n\nNo emoji."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        6160
+      ],
+      "id": "9c64cec8-ce96-41ea-afe8-affd41021616",
+      "name": "MockInterview_Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "const prev = $('Read_Message').first().json;\n\n// Safe-fetch both API results — they may not have run if no URL was provided\nlet profileItem = {};\nlet reposItem = [];\ntry { profileItem = $('GitHub_Profile_API').first().json || {}; } catch(e) {}\ntry {\n  const r = $('GitHub_Repos_API').first().json;\n  reposItem = Array.isArray(r) ? r : [];\n} catch(e) {}\n\n// If profile not found or APIs didn't run, pass message through to agent\nif (!profileItem || profileItem.message === 'Not Found' || !profileItem.login) {\n  return [{ json: {\n    userMessage: prev.userMessage + '\\n\\n[Note: GitHub profile not found or URL not provided. Please share your GitHub URL or describe your projects.]',\n    sessionId: prev.sessionId,\n    ts: prev.ts\n  }}];\n}\n\nfunction safe(v) { return v ? String(v).trim() : ''; }\nconst name = safe(profileItem.name || profileItem.login);\nconst bio = safe(profileItem.bio);\nconst location = safe(profileItem.location);\nconst publicRepos = profileItem.public_repos || 0;\nconst followers = profileItem.followers || 0;\n\nconst topRepos = reposItem.sort((a,b) => (b.stargazers_count - a.stargazers_count)).slice(0, 8);\nconst languages = {};\nreposItem.forEach(r => { if (r.language) languages[r.language] = (languages[r.language] || 0) + 1; });\nconst topLangs = Object.entries(languages).sort((a,b) => b[1]-a[1]).map(([l,c]) => `${l}(${c})`).join(', ');\nconst totalStars = reposItem.reduce((s,r) => s + (r.stargazers_count || 0), 0);\nconst repoText = topRepos.map((r,i) =>\n  `${i+1}. ${safe(r.name)} [${safe(r.language||'N/A')}] ★${r.stargazers_count}\\n   ${safe(r.description||'No description')}\\n   ${safe(r.html_url)}`\n).join('\\n\\n');\n\nconst block = `SCRAPED GITHUB PROFILE\nUsername: ${safe(profileItem.login)}\nName: ${name}\nBio: ${bio||'(empty)'}\nPublic repos: ${publicRepos} | Stars: ${totalStars} | Followers: ${followers}\nLanguages: ${topLangs||'(none)'}\n\nTOP REPOS:\n${repoText||'(none)'}`;\n\nreturn [{ json: {\n  userMessage: `${prev.userMessage}\\n\\n${block}`,\n  sessionId: prev.sessionId,\n  ts: prev.ts,\n  githubUsername: safe(profileItem.login),\n  publicRepos,\n  totalStars,\n  topLanguages: topLangs\n}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1568,
+        5648
+      ],
+      "id": "23e6840a-8fbf-4f3f-abe9-52b6d8ecd2fc",
+      "name": "Prepare_GitHub_Data"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/users/{{ $('Extract_GitHub_URL').first().json.username }}/repos?sort=updated&per_page=20&type=owner",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "CareerForge-AI/1.0"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GITHUB_TOKEN || '' }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 8000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1264,
+        5648
+      ],
+      "id": "228b1b4f-d74a-48eb-956d-c410315f1668",
+      "name": "GitHub_Repos_API",
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/users/{{ $json.username }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "CareerForge-AI/1.0"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GITHUB_TOKEN || '' }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 8000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        5648
+      ],
+      "id": "2726baa7-2c32-4247-9058-a26468f467a9",
+      "name": "GitHub_Profile_API",
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const prev = $json;\nconst msg = (prev.userMessage || '');\nconst ghMatch = msg.match(/https?:\\/\\/(www\\.)?github\\.com\\/([a-zA-Z0-9\\-]+)(\\/([a-zA-Z0-9\\-._]+))?/i);\nconst githubUrl = ghMatch ? ghMatch[0] : null;\nconst username = ghMatch ? ghMatch[2] : null;\nconst repoName = ghMatch ? (ghMatch[4]||null) : null;\nreturn [{ json: { userMessage: prev.userMessage, sessionId: prev.sessionId, ts: prev.ts, githubUrl, username, repoName, isRepo: !!repoName, hasUrl: !!githubUrl }}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        5760
+      ],
+      "id": "6f37a5b8-b7f4-4c0e-b396-65d35bc736fd",
+      "name": "Extract_GitHub_URL"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI GitHub Portfolio Analyst for India 2025-2026.\n\nIf no URL, ask for it. If data present, output immediately.\n\n━━━ GITHUB PORTFOLIO AUDIT ━━━\nUsername | Repos | Stars | Languages | Account age\n\n━━━ SCORES ━━━\nOverall | Code Quality | Diversity | README | Recruiter Appeal (each X/100)\n\n━━━ RECRUITER IMPRESSION ━━━\n[1 paragraph] | Hireable: STRONG/MODERATE/WEAK\n\n━━━ TOP REPOS ━━━\nFor each: Name | Language | Stars | Recruiter value | What it proves | Fix\n\n━━━ CRITICAL GAPS ━━━\n3 gaps with specific fixes\n\n━━━ PROFILE README TEMPLATE ━━━\n[Complete ready-to-use template]\n\n━━━ 30-DAY PLAN ━━━\n[Weekly tasks]\n\nTop 3 improvements ranked by hiring impact. No emoji."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1264,
+        5760
+      ],
+      "id": "e87fd7fd-c50e-475a-ab75-23d0be6c07c3",
+      "name": "GitHub_Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        656,
+        5920
+      ],
+      "id": "245964a9-ecba-4d13-84e7-93cede398939",
+      "name": "Groq_GitHub",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "groqApi": {
+          "id": "EQUJubhPpKnQdIEl",
+          "name": "Groq account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "gh-url-check-001",
+              "leftValue": "={{ $json.hasUrl }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        656,
+        5760
+      ],
+      "id": "43b56641-5c27-42ae-be7c-a2d7c0de67a3",
+      "name": "Check_Has_GitHub_URL"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {
+          "temperature": 0.6
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        368,
+        5120
+      ],
+      "id": "d4d7469e-b01c-428a-9c32-13ce24066c93",
+      "name": "Groq_JobMatch",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "groqApi": {
+          "id": "EQUJubhPpKnQdIEl",
+          "name": "Groq account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Career Health Analyst for India 2025-2026.\n\nOutput IMMEDIATELY:\n\n━━━ CAREER HEALTH DASHBOARD ━━━\nFor: [name/role] | Target: [role] | Date: today\n\n━━━ SCORES (X/100) ━━━\nATS | LinkedIn | Technical | Interview Readiness | Market | Portfolio | Career IQ\nOVERALL HIRING PROBABILITY: X%\n\n━━━ BREAKDOWN ━━━\nATS: working/missing | Technical: skills/gaps | Interview: prepared/weak | Market: vs peers + salary range\n\n━━━ TOP 3 IMPROVEMENTS ━━━\n[specific actions]\n\n━━━ 30-DAY PLAN ━━━\nWeek 1-4: [specific task each week]\n\n━━━ CAREER IQ ━━━\nDomain X/25 | Technical X/25 | Soft X/25 | Market X/25 | Total X/100\n\nDefault to fresher data analyst if no resume. No emoji."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        4560
+      ],
+      "id": "8eee3d2a-38cc-4208-8b34-e8de4c51ddaa",
+      "name": "Dashboard_Agent"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "set-output-001",
+              "name": "output",
+              "value": "={{ $json.output || $json.text || $json.response || $json.result || $json.message || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "set-output-002",
+              "name": "pdfBase64",
+              "value": "={{ $json.pdfBase64 || null }}",
+              "type": "string"
+            },
+            {
+              "id": "set-output-003",
+              "name": "pdfFilename",
+              "value": "={{ $json.pdfFilename || null }}",
+              "type": "string"
+            },
+            {
+              "id": "set-output-004",
+              "name": "pdfAvailable",
+              "value": "={{ $json.pdfAvailable || false }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3392,
+        5312
+      ],
+      "id": "58aa5952-a7ed-4a25-a76e-1626e7f0c8ad",
+      "name": "Set_Output"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        3824,
+        5312
+      ],
+      "id": "f9e52d9e-b015-4ffc-a5c9-3ff45f387afc",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "jobpilot",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1744,
+        768
+      ],
+      "id": "142af20d-000d-4a7c-82c5-d6abc53c721d",
+      "name": "Webhook",
+      "webhookId": "e3f33b18-c692-46da-ba96-1cceffb2d57e"
+    },
+    {
+      "parameters": {
+        "operation": "Run actor and get dataset",
+        "actorSource": "store",
+        "actorId": {
+          "__rl": true,
+          "value": "https://console.apify.com/actors/7ZuNFntlWSa1LO5uG/input",
+          "mode": "url"
+        },
+        "customBody": "={\n    \"contractType\": \"1\",\n    \"datePosted\": \"1 week\",\n    \"employmentTypes\": [\"F\"],\n    \"extractCompanyData\": true,\n    \"keywords\": \"{{ $json.role }}\",\n    \"location\": \"India\",\n    \"maxRecords\": 10\n}"
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        656,
+        256
+      ],
+      "id": "241c9bc4-ca43-4aa8-9327-d991aed46ec0",
+      "name": "Apify_LinkedIn",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "apifyApi": {
+          "id": "eF9SwlagTsL6m1Jq",
+          "name": "Apify account 2"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const prev = $json;\nconst msg = (prev.userMessage || '').trim();\nconst sessId = prev.sessionId || '';\nlet role = 'data analyst';\nconst rolePatterns = [/(?:find|search|looking for|want|need|get)\\s+(?:a\\s+)?([a-z][a-z\\s\\-]+?)\\s+(?:jobs?|roles?|positions?|internships?|openings?)/i,/([a-z][a-z\\s\\-]+?)\\s+(?:jobs?|roles?|positions?|internships?|openings?)\\s+(?:in|at|near|for)/i,/(?:jobs?|roles?)\\s+(?:for|as)\\s+(?:a\\s+)?([a-z][a-z\\s\\-]+)/i];\nfor (const pat of rolePatterns) { const m = msg.match(pat); if (m && m[1] && m[1].trim().length > 1) { role = m[1].trim().toLowerCase(); break; } }\nlet location = 'pune';\nconst cities = ['mumbai','pune','bangalore','bengaluru','hyderabad','delhi','noida','gurgaon','gurugram','chennai','kolkata','ahmedabad','surat','jaipur','nashik','nagpur','indore','bhopal'];\nconst lower = msg.toLowerCase();\nfor (const city of cities) { if (lower.includes(city)) { location = city; break; } }\nconst inMatch = msg.match(/\\bin\\s+([A-Za-z][A-Za-z\\s]+?)(?:\\s*$|\\s*,|\\s+for|\\s+with)/i);\nif (inMatch) location = inMatch[1].trim().toLowerCase();\nif (location === 'bengaluru') location = 'bangalore';\nif (location === 'gurugram') location = 'gurgaon';\nlet experience = '0';\nconst expMatch = msg.match(/(\\d+)\\s*(?:years?|yrs?)\\s+(?:experience|exp)/i);\nif (expMatch) experience = expMatch[1];\nif (/fresher|entry.?level|0\\s*years?|no experience/i.test(msg)) experience = '0';\nconst expNum = parseInt(experience) || 0;\nlet experienceLevel = '2';\nif (/intern(ship)?/i.test(msg)) experienceLevel = '1';\nelse if (expNum === 0) experienceLevel = '2';\nelse if (expNum <= 2) experienceLevel = '3';\nelse if (expNum <= 6) experienceLevel = '4';\nelse experienceLevel = '5';\nlet jobTypeCode = 'F';\nif (/intern(ship)?/i.test(msg)) jobTypeCode = 'I';\nelse if (/part.?time/i.test(msg)) jobTypeCode = 'P';\nelse if (/contract|freelance/i.test(msg)) jobTypeCode = 'C';\nlet workplaceType = '1';\nif (/\\bremote\\b/i.test(msg)) workplaceType = '2';\nif (/\\bhybrid\\b/i.test(msg)) workplaceType = '3';\nconst keyword = encodeURIComponent(role);\nconst loc = encodeURIComponent(location + ', India');\nconst linkedInUrl = `https://www.linkedin.com/jobs/search/?keywords=${keyword}&location=${loc}&f_E=${experienceLevel}&f_JT=${jobTypeCode}&f_WT=${workplaceType}&sortBy=DD`;\nreturn [{ json: { linkedInUrl, role, location, experience, remote: workplaceType === '2', job_type: jobTypeCode === 'I' ? 'internship' : 'fulltime', sessionId: sessId, userMessage: prev.userMessage, ts: prev.ts } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        256
+      ],
+      "id": "c7d96a95-af4c-4cbb-8477-72e18d5c2359",
+      "name": "Extract_Job_Params_LinkedIn"
+    },
+    {
+      "parameters": {
+        "jsCode": "const prev = $json;\nconst msg = (prev.userMessage || '').trim();\nconst sessId = prev.sessionId || '';\nlet role = 'data analyst';\nconst rolePatterns = [/(?:find|search|looking for|want|need|get)\\s+(?:a\\s+)?([a-z][a-z\\s\\-]+?)\\s+(?:jobs?|roles?|positions?|internships?|openings?)/i,/([a-z][a-z\\s\\-]+?)\\s+(?:jobs?|roles?|positions?|internships?|openings?)\\s+(?:in|at|near|for)/i,/(?:jobs?|roles?)\\s+(?:for|as)\\s+(?:a\\s+)?([a-z][a-z\\s\\-]+)/i];\nfor (const pat of rolePatterns) { const m = msg.match(pat); if (m && m[1] && m[1].trim().length > 1) { role = m[1].trim().toLowerCase(); break; } }\nlet location = 'pune';\nconst cities = ['mumbai','pune','bangalore','bengaluru','hyderabad','delhi','noida','gurgaon','gurugram','chennai','kolkata','ahmedabad','surat','jaipur','nashik','nagpur','indore','bhopal'];\nconst lower = msg.toLowerCase();\nfor (const city of cities) { if (lower.includes(city)) { location = city; break; } }\nconst inMatch = msg.match(/\\bin\\s+([A-Za-z][A-Za-z\\s]+?)(?:\\s*$|\\s*,|\\s+for|\\s+with)/i);\nif (inMatch) location = inMatch[1].trim().toLowerCase();\nlet experience = '0';\nconst expMatch = msg.match(/(\\d+)\\s*(?:years?|yrs?)\\s+(?:experience|exp)/i);\nif (expMatch) experience = expMatch[1];\nif (/fresher|entry.?level|0\\s*years?|no experience/i.test(msg)) experience = '0';\nconst remote = /remote/i.test(msg);\nconst job_type = /intern(ship)?/i.test(msg) ? 'internship' : 'fulltime';\nconst expNum = parseInt(experience) || 0;\nconst roleSlug = role.replace(/\\s+/g, '-');\nconst locSlug = location.replace(/\\s+/g, '-');\nlet url = `https://www.naukri.com/${roleSlug}-jobs-in-${locSlug}-${expNum}-to-${expNum + 2}-years`;\nconst params = [];\nif (remote) params.push('wfhType=2');\nif (job_type === 'internship') params.push('jobType=6');\nparams.push('sort=dd');\nurl += '?' + params.join('&');\nreturn [{ json: { url, role, location, experience, remote, job_type, sessionId: sessId, userMessage: prev.userMessage, ts: prev.ts } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        64
+      ],
+      "id": "31d1add9-3951-4f1e-962f-461114a8f545",
+      "name": "Extract_Job_Params_Naukri"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Skill Gap Analyst for India 2025-2026.\n\nOutput IMMEDIATELY:\n\n━━━ SKILL GAP ━━━\nTarget Role | Market Match % | Hiring Readiness %\n\nSkills You Have (demand: HIGH/MED/LOW) | Critical Missing (ranked, time to learn, salary impact)\n\nTop 5 certifications: name | platform | duration | cost | why it matters\n\nTop 3 projects: name | tech stack | recruiter value\n\n━━━ ROADMAP ━━━\n30 days: [weekly tasks] | 60 days: [goals] | 90 days: [interview-ready target]\n\nNo emoji."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        960
+      ],
+      "id": "fee9eb04-48f4-4c4a-87ff-31f12338cba5",
+      "name": "SkillGap_Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1072,
+        3792
+      ],
+      "id": "bd499d0f-df2b-4db2-9f63-f57c38197a3d",
+      "name": "Groq_Apply",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "groqApi": {
+          "id": "aL9WD8DjXZ51e0aC",
+          "name": "Groq account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "Role: LinkedIn profile strategist.\nTask: Audit and rewrite immediately.\nOutput: Headline | About | Experience bullets | Skills to add | SSI estimate | Top 3 improvements. No emoji."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1568,
+        2960
+      ],
+      "id": "4cbce779-4efa-45bd-9b0c-6ee655727e37",
+      "name": "LinkedIn_Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        960,
+        3120
+      ],
+      "id": "3034aee4-0249-4f15-993f-a1f06c6cbd32",
+      "name": "Groq_LinkedIn",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "groqApi": {
+          "id": "aL9WD8DjXZ51e0aC",
+          "name": "Groq account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Salary Intelligence Coach for India 2025-2026.\n\nOutput IMMEDIATELY:\n\n━━━ SALARY REPORT ━━━\nRole | Location | Experience: Fresher\n\nRanges by company type: Startup | Mid-size IT | MNC | Product | Top-tier\n\nSkill boosters (+%): SQL+Python+BI | Cloud cert | Internship | GitHub | CGPA 8.5+\n\nNegotiation script (exact words for expected CTC + counter-offer)\n\nCTC checklist: Fixed/variable | Notice | PF | Hike cycle | Joining bonus\n\nRed flags in offers | Offer evaluation X/100\n\nNo emoji."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        2560
+      ],
+      "id": "a91859f4-26f0-439e-9c43-68ff074e5f9c",
+      "name": "Salary_Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        368,
+        2720
+      ],
+      "id": "26532ba1-fa23-4816-80a2-a9e4ec4fe871",
+      "name": "Groq_Salary",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "groqApi": {
+          "id": "hXNP9BU8BnyvGuQb",
+          "name": "Groq account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}\n\nJob description analysis: {{ $json.jdKeywords }}\nFull job description excerpt: {{ $json.topJobDesc }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Interview Coach for India 2025-2026.\n\nGenerate ALL 15 Q&As IMMEDIATELY.\n\nFormat per Q:\nQ[N]. [Question] | DIFFICULTY: Easy/Med/Hard\nIDEAL ANSWER: [STAR format]\nWHAT THEY'RE TESTING: [reason]\nMISTAKE TO AVOID: [common wrong answer]\n\nMix: Q1-5 Technical | Q6-9 Case | Q10-12 Behavioral | Q13-14 Motivation | Q15 Salary\n\nAfter Q15:\nConfidence tips | Common mistakes | Questions to ask interviewer\n\nNo emoji."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        960,
+        1760
+      ],
+      "id": "e2c0f9f8-e4ea-42f7-98c3-185d0f945bcc",
+      "name": "Interview_Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        656,
+        1920
+      ],
+      "id": "2405bf02-10c8-45fc-b9c9-9e95eb786b8e",
+      "name": "Groq_Interview",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "groqApi": {
+          "id": "hXNP9BU8BnyvGuQb",
+          "name": "Groq account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const prev = $json;\n\nlet topJobDesc = '';\nlet topJobTitle = '';\nlet topJobCompany = '';\ntry {\n  const srj = $('Score_Rank_Jobs').first().json;\n  topJobDesc = srj.topJobDesc || '';\n  topJobTitle = srj.topJobTitle || '';\n  topJobCompany = srj.topJobCompany || '';\n} catch(e) {}\n\nconst jobDesc = (topJobDesc || prev.userMessage || '').toLowerCase();\n\nconst stopWords = new Set(['the','and','or','a','an','to','of','in','for','is','are','will','with','as','on','at','by','be']);\nfunction extractKeywords(text) {\n  if (!text) return {};\n  return text.replace(/[^a-z0-9\\s-]/g, ' ').split(/\\s+/).filter(w => w.length > 3 && !stopWords.has(w)).reduce((acc, w) => { acc[w] = (acc[w] || 0) + 1; return acc; }, {});\n}\n\nconst wordFreq = extractKeywords(jobDesc);\nconst sortedKeys = Object.entries(wordFreq).sort((a, b) => b[1] - a[1]).slice(0, 20).map(([word]) => word);\n\nconst techPattern = /\\b(Python|SQL|Java|React|Node\\.?js|AWS|Azure|GCP|Docker|Kubernetes|Tableau|Power\\s?BI|Excel|Git|REST|API|Machine\\s?Learning|ML|NLP|TensorFlow|PyTorch|pandas|numpy|Spark|MongoDB|PostgreSQL|MySQL)\\b/gi;\nconst techMatches = [...(topJobDesc || prev.userMessage || '').matchAll(techPattern)].map(m => m[0]).filter((v, i, a) => a.indexOf(v) === i).slice(0, 12);\n\nconst keywordSummary = techMatches.length ? `Key technologies: ${techMatches.join(', ')}. Key themes: ${sortedKeys.slice(0, 8).join(', ')}.` : `Key themes: ${sortedKeys.slice(0, 12).join(', ')}.`;\n\nreturn [{ json: { userMessage: prev.userMessage, sessionId: prev.sessionId, jdKeywords: keywordSummary, topJobTitle, topJobCompany, topJobDesc: topJobDesc || prev.userMessage } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        1760
+      ],
+      "id": "c5b16b87-a598-4674-9949-d99df51d093d",
+      "name": "Parse_JD"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst msg = $('Read_Message').first().json.userMessage || '';\nconst sessionId = $('Read_Message').first().json.sessionId;\n\n// Parse company name from the cover letter prompt\nlet topJobCompany = '';\nlet topJobTitle = '';\nconst companyMatch = msg.match(/Company:\\s*([^\\n]+)/i);\nif (companyMatch) topJobCompany = companyMatch[1].trim();\nconst roleMatch = msg.match(/Role:\\s*([^\\n]+)/i);\nif (roleMatch) topJobTitle = roleMatch[1].trim();\n\n// Fallback to Score_Rank_Jobs if job search was done earlier\nif (!topJobCompany) {\n  try { const srj = $('Score_Rank_Jobs').first().json; topJobCompany = srj.topJobCompany || ''; topJobTitle = srj.topJobTitle || ''; } catch(e) {}\n}\n\n// Extract company fact from SerpAPI result\nlet companyFact = '';\ntry {\n  const results = item.organic_results || [];\n  if (results.length > 0) {\n    const snippets = results.map(r => r.snippet || '').filter(s => s.length > 30);\n    if (snippets.length > 0) {\n      companyFact = snippets[0].split(/[.!?]/)[0].trim();\n      if (companyFact.length > 150) companyFact = companyFact.slice(0, 150) + '...';\n    }\n  }\n} catch(e) { companyFact = ''; }\n\nreturn [{ json: {\n  userMessage: msg,\n  sessionId,\n  topJobCompany,\n  topJobTitle,\n  companyFact: companyFact || '',\n  hasFact: companyFact.length > 0\n} }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        656,
+        1360
+      ],
+      "id": "133a5597-8862-46a8-9db5-eb5ceb66f0e1",
+      "name": "Prepare_Company_Fact"
+    },
+    {
+      "parameters": {
+        "url": "={{ (() => { const msg = $('Read_Message').first().json.userMessage || ''; let company = ''; const companyMatch = msg.match(/Company:\\s*([^\\n]+)/i); if (companyMatch) company = companyMatch[1].trim(); if (!company) { try { company = $('Score_Rank_Jobs').first().json.topJobCompany || ''; } catch(e) {} } if (!company) company = 'tech company India'; return 'https://api.serpapi.com/search.json?q=' + encodeURIComponent(company + ' company India 2025 hiring OR funding OR news') + '&api_key=' + ($env.SERP_API_KEY||'') + '&num=3&hl=en&gl=in'; })() }}",
+        "options": {
+          "timeout": 8000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        368,
+        1360
+      ],
+      "id": "d4134057-d934-4ef9-bbcd-d05a9d6329ef",
+      "name": "Company_Research",
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ (() => { let role = 'infer from resume', topTitle = 'not available', topCompany = '', topDesc = 'infer from resume content'; try { const srj = $('Score_Rank_Jobs').first(); if (srj && srj.json && typeof srj.json === 'object') { if (srj.json.role) role = srj.json.role; if (srj.json.topJobTitle) topTitle = srj.json.topJobTitle; if (srj.json.topJobCompany) topCompany = srj.json.topJobCompany; if (srj.json.topJobDesc) topDesc = srj.json.topJobDesc; } } catch(e) {} return 'Target Role: ' + role + '\\nTop Job: ' + topTitle + ' at ' + topCompany + '\\nKey Skills Required: ' + topDesc + '\\n\\nUser Request: ' + $json.userMessage; })() }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Resume Expert for India 2025-2026.\n\nOutput IMMEDIATELY:\n\n━━━ ATS AUDIT ━━━\nATS Score X/100 | Recruiter Impression: 1 line | Hiring Probability X% | Read time: Xs\nStrengths: 3 bullets | Critical Issues: 3 bullets with fix\nMissing Keywords | Weak Bullets count | Formatting Issues\n\n━━━ REWRITTEN RESUME ━━━\n[Complete ATS-optimised rewrite]\n\nRules: Only use real numbers from resume. No emoji."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        432,
+        544
+      ],
+      "id": "09498512-5c1a-4916-88eb-80c6c0ebbea5",
+      "name": "Resume_Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={% if $json.noResults %}\nNo jobs found for {{ $json.role }} in {{ $json.location }}.\n{% else %}\nScraped jobs for {{ $json.role }} in {{ $json.location }} ({{ $json.jobCount }} results):\n\n{{ $json.jobList }}\n{% endif %}",
+        "options": {
+          "systemMessage": "Role: CareerForge Job Formatter.\nTask: Format EVERY single job in the provided list into a clean, user-facing CareerForge card. Do not skip, summarize, merge, or alter actual job details. Output all jobs exactly as separate cards.\n\nFor each job, use this exact structure:\n\nNo. [job number]\n🎯 [Job Title]\n🏢 [Company]\n📍 [Location]\n💼 [Work Mode]\n📅 Posted: [Posted Date]\n⏰ Apply Before: [Closing Date]\n\nWhy it matches:\n• [Reason bullet 1]\n• [Reason bullet 2]\n• [Reason bullet 3]\n\nSkills likely required:\n• [Skill 1]\n• [Skill 2]\n• [Skill 3]\n• [Skill 4]\n• [Skill 5]\n\nApply: [URL]\n\nRules:\n- Never invent or modify job details.\n- Never skip a job.\n- If a field is missing, write \"Not available\" for that field.\n- If a description is missing, omit the description line entirely.\n- Do not use any inline HTML.\n- Use emojis exactly as shown in the structure.\n- After listing all jobs, add this line:\n\"Paste your resume for a full CareerForge match analysis.\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1936,
+        160
+      ],
+      "id": "ae40ffd1-f9d4-4c7b-aefb-018287ed5d32",
+      "name": "Format_Jobs"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        416
+      ],
+      "id": "79e939af-4e3c-4404-b989-dbba07e89ef6",
+      "name": "Groq_Search",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "groqApi": {
+          "id": "hXNP9BU8BnyvGuQb",
+          "name": "Groq account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet params = {};\ntry { params = $('Extract_Job_Params_Naukri').first().json; } catch(e) {}\ntry { if (!params.role) params = $('Extract_Job_Params_LinkedIn').first().json; } catch(e) {}\nconst role = String(params.role || '').toLowerCase();\nconst loc = String(params.location || 'india').toLowerCase();\nconst boostWords = ['intern','fresher','entry','junior','trainee','graduate','analyst','associate'];\nfunction safeStr(val) { if (val === null || val === undefined) return ''; if (typeof val === 'string') return val; if (typeof val === 'object') { return val.city || val.name || val.text || val.label || JSON.stringify(val); } return String(val); }\nfunction parseSalaryLPA(s) { s = safeStr(s); if (!s) return null; const range = s.match(/(\\d+(?:\\.\\d+)?)\\s*(?:-|to|–)\\s*(\\d+(?:\\.\\d+)?)\\s*(?:lpa|lakh)/i); if (range) return { min: parseFloat(range[1]), max: parseFloat(range[2]) }; return null; }\nfunction scoreJob(j) { const titleLower = safeStr(j.title).toLowerCase(); const text = (titleLower + ' ' + safeStr(j.description) + ' ' + safeStr(j.skills)).toLowerCase(); const locLower = safeStr(j.location).toLowerCase(); let s = 0; for (const k of boostWords) if (text.includes(k)) s += 10; const roleWords = role.split(' ').filter(w => w.length > 2); for (const rw of roleWords) if (titleLower.includes(rw)) s += 25; for (const rw of roleWords) if (text.includes(rw)) s += 5; if (locLower.includes(loc)) s += 30; if (locLower.includes('remote')) s += 15; if (j.postedAt) { try { const daysAgo = (Date.now() - new Date(j.postedAt)) / 86400000; if (daysAgo < 1) s += 40; else if (daysAgo < 3) s += 25; else if (daysAgo < 7) s += 15; } catch(e) {} } return s; }\nif (items.length === 1 && items[0].json._empty) { const e = items[0].json; return [{ json: { jobList: '', jobCount: 0, noResults: true, role: safeStr(e.role), location: safeStr(e.location), sessionId: safeStr(e.sessionId), userMessage: safeStr(e.userMessage) } }]; }\nconst valid = items.filter(i => i.json && i.json.title && !i.json.error && !i.json._empty);\nif (!valid.length) { return [{ json: { jobList: '', jobCount: 0, noResults: true, role, location: loc, sessionId: safeStr(params.sessionId), userMessage: safeStr(params.userMessage) } }]; }\nconst scored = valid.map(i => ({ ...i.json, _score: scoreJob(i.json) })).sort((a, b) => b._score - a._score).slice(0, 5);\nconst list = scored.map((j, i) => { let age = 'recently'; try { if (j.postedAt) age = Math.round((Date.now() - new Date(j.postedAt)) / 86400000) + 'd ago'; } catch(e) {} return [`JOB ${i+1}:`, `Title: ${safeStr(j.title)}`, `Company: ${safeStr(j.company)} [${j.source}]`, `Location: ${safeStr(j.location)}`, `Posted: ${age}`, `Salary: ${safeStr(j.salary) || 'Not disclosed'}`, `Apply: ${safeStr(j.url) || 'Search on ' + j.source}`, ...(safeStr(j.description) ? [`Description: ${safeStr(j.description).slice(0, 500)}`] : [])].join('\\n'); }).join('\\n\\n---\\n\\n');\nconst top = scored[0];\nreturn [{ json: { jobList: list, jobCount: scored.length, noResults: false, topJobTitle: safeStr(top?.title), topJobCompany: safeStr(top?.company), topJobUrl: safeStr(top?.url), topJobDesc: safeStr(top?.description || top?.skills).slice(0, 600), role, location: loc, sessionId: safeStr(params.sessionId), userMessage: safeStr(params.userMessage) } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1632,
+        160
+      ],
+      "id": "2a658e1a-228f-4c8a-a6f4-3708ca200da6",
+      "name": "Score_Rank_Jobs"
+    },
+    {
+      "parameters": {
+        "jsCode": "const allItems = $input.all();\nfunction safeStr(val) { if (val === null || val === undefined) return ''; if (typeof val === 'string') return val.trim(); if (typeof val === 'object') { return (val.city || val.name || val.text || val.label || JSON.stringify(val)).trim(); } return String(val).trim(); }\nfunction stripHtml(s) { return s ? s.replace(/<[^>]+>/g, \" \").replace(/&nbsp;/g,\" \").replace(/&amp;/g,\"&\").replace(/&lt;/g,\"<\").replace(/&gt;/g,\">\").replace(/\\s{2,}/g,\" \").trim() : \"\"; }\nfunction parsePlaceholder(placeholders, type) { if (!Array.isArray(placeholders)) return ''; const p = placeholders.find(function(x) { return x.type === type; }); return p ? safeStr(p.label) : ''; }\nfunction parsePostedAt(raw) { if (!raw) return ''; const s = safeStr(raw); if (/^\\d{4}-\\d{2}-\\d{2}/.test(s)) return s; const lower = s.toLowerCase(); if (lower.indexOf('today') > -1 || lower.indexOf('hour') > -1) { return new Date().toISOString(); } const daysMatch = s.match(/(\\d+)\\s*day/i); if (daysMatch) { const d = new Date(); d.setDate(d.getDate() - parseInt(daysMatch[1])); return d.toISOString(); } return ''; }\nfunction normalise(j) {\n  const isNaukri = !!(j.company_name || j.tags_and_skills || j.job_id);\n  const isLinkedIn = !!(j.companyName || j.attributes);\n  const isGoogleSearch = !!(j.displayedUrl || j.type === 'organic');\n\n  if (isNaukri) {\n    const placeholders = j.placeholders || [];\n    var rawUrl = j.jd_url || (j.static_url ? 'https://www.naukri.com/' + j.static_url : '') || '';\n    return {\n      title: safeStr(j.title),\n      company: safeStr(j.company_name),\n      location: parsePlaceholder(placeholders, 'location'),\n      salary: parsePlaceholder(placeholders, 'salary') || 'Not disclosed',\n      description: safeStr(j.tags_and_skills || j.snippet),\n      url: safeStr(rawUrl),\n      postedAt: parsePostedAt(j.footer_placeholder_label || j.postedAt),\n      skills: safeStr(j.tags_and_skills),\n      source: 'Naukri'\n    };\n  }\n\n  if (isLinkedIn) {\n    return {\n      title: safeStr(j.title),\n      company: safeStr(j.companyName || j.company),\n      location: safeStr(j.location),\n      salary: safeStr(j.salary) || 'Not disclosed',\n      description: stripHtml(safeStr(j.description || j.descriptionText || j.jobDescription || j.shortDescription || j.descriptionHtml || '')),\n      url: safeStr(j.url || j.jobUrl || j.applyUrl),\n      postedAt: parsePostedAt(j.postedAt || j.publishedAt),\n      source: 'LinkedIn'\n    };\n  }\n\n  if (isGoogleSearch) {\n    // Extract company name from title if format is \"Role - Company | Site\"\n    const titleParts = safeStr(j.title).split(/\\s[-|]\\s/);\n    const company = titleParts.length > 1 ? titleParts[titleParts.length - 1].replace(/naukri\\.com|linkedin\\.com/i, '').trim() : '';\n    return {\n      title: titleParts[0] || safeStr(j.title),\n      company: company,\n      location: safeStr(j.location) || '',\n      salary: 'Not disclosed',\n      description: safeStr(j.description || j.snippet),\n      url: safeStr(j.url),\n      postedAt: '',\n      source: 'Google/Naukri'\n    };\n  }\n\n  // Generic fallback\n  return {\n    title: safeStr(j.title || j.jobTitle),\n    company: safeStr(j.company || j.companyName),\n    location: safeStr(j.location),\n    salary: safeStr(j.salary) || 'Not disclosed',\n    description: safeStr(j.description || j.snippet),\n    url: safeStr(j.url || j.jobUrl),\n    postedAt: parsePostedAt(j.postedAt || j.datePosted),\n    source: 'Other'\n  };\n}\nconst seen = new Set(); const deduped = [];\nfor (var i = 0; i < allItems.length; i++) { const j = allItems[i].json; if (!j || j.error || j._empty) continue; const n = normalise(j); if (!n.title && !n.company) continue; const key = n.title.toLowerCase().replace(/\\s+/g,'_') + '__' + n.company.toLowerCase().replace(/\\s+/g,'_'); if (seen.has(key)) continue; seen.add(key); deduped.push({ json: n }); }\nif (!deduped.length) { var params = {}; try { params = $('Extract_Job_Params_Naukri').first().json; } catch(e) {} return [{ json: { _empty: true, role: safeStr(params.role), location: safeStr(params.location), sessionId: safeStr(params.sessionId), userMessage: safeStr(params.userMessage) } }]; }\nreturn deduped;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1248,
+        160
+      ],
+      "id": "42ba5b7e-e15a-4326-a5d7-fdaf59127028",
+      "name": "Deduplicate_Jobs"
+    },
+    {
+      "parameters": {
+        "operation": "Run actor and get dataset",
+        "actorSource": "store",
+        "actorId": {
+          "__rl": true,
+          "value": "https://console.apify.com/actors/hMvNSpz3JnHgl5jkh/input",
+          "mode": "url"
+        },
+        "customBody": "={\n    \"country\": \"IN\",\n    \"followApplyRedirects\": true,\n    \"location\": \"{{ $json.location }}\",\n    \"maxItemsPerSearch\": 10,\n    \"parseCompanyDetails\": true,\n    \"position\": \"{{ $json.role }}\",\n    \"saveOnlyUniqueItems\": true\n}"
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        656,
+        64
+      ],
+      "id": "e07771ff-46d5-4e5c-8dbd-6cee8151c968",
+      "name": "Apify_Naukri",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "apifyApi": {
+          "id": "eF9SwlagTsL6m1Jq",
+          "name": "Apify account 2"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "FIND_JOB",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d90f02d6-b16f-46e2-aa5c-1ce5e4fc8be3"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "find_job"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "UPLOAD_RESUME",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "1a948e8d-ca39-494e-b581-6275da5450cd"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "upload_resume"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "SKILL_GAP",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "461fdad3-ada1-4d28-9120-3620c43cd4df"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "skill_gap"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "INTERVIEW_PREP",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "014e19b0-d681-4935-8efa-d2d264bfd1f2"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "interview_prep"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "SALARY_ADVICE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ff4d43fe-669b-418b-a8f6-507952bbc405"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "salary_advice"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "LINKEDIN_HELP",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "56cf32f5-0685-4b2b-84d2-0a18342e9864"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "linkedin_help"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "CAREER_DASHBOARD",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "1dcb537b-f408-48ab-a6e4-f27c471deaf6"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "career_dashboard"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "MATCH_SCORE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "5ee7a878-5fb3-4628-b7ee-3f57820f825e"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "match_score"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "MOCK_INTERVIEW",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "4168f55f-533e-437d-a3a7-8e716b5f62e3"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "mock_interview"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "RESUME_OPTIMISE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "9a31c9c5-c3b3-4753-8174-51ec00e06f20"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "resume_optimise"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "COMPANY_RESEARCH",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cd0af985-f630-4e93-b5ec-ea444d633f20"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "company_research"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "OFFER_COMPARE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ec3f371b-6686-46fe-9bb2-5b3afebc0586"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "offer_compare"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "CAREER_PIVOT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "16ddcbb3-762a-463f-bd11-2c45d8c165b5"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "career_pivot"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "JOB_SPRINT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "56fa2b92-2e16-49f3-9280-a0fa4776dff6"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "job_sprint"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "GITHUB_REVIEW",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "4fa0345f-d3ec-4530-9ec3-3b3e337a2483"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "github_review"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "COVER_LETTER",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cover-letter-rule-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cover_letter"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        -240,
+        768
+      ],
+      "id": "ad710a4c-2bd6-4408-87cf-a166fc66655d",
+      "name": "Route_Intent"
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = ($input.first().json.output || '').trim();\nconst prev = $('Read_Message').first().json;\nconst msg = (prev.userMessage || '').toLowerCase();\nconst validIntents = ['FIND_JOB','UPLOAD_RESUME','SKILL_GAP','COVER_LETTER','INTERVIEW_PREP','MOCK_INTERVIEW','SALARY_ADVICE','LINKEDIN_HELP','GITHUB_REVIEW','APPLY_JOB','TRACKER_STATUS','CAREER_DASHBOARD','MATCH_SCORE','RESUME_OPTIMISE','COMPANY_RESEARCH','NETWORKING_MSG','OFFER_COMPARE','CAREER_PIVOT','JOB_SPRINT','GITHUB_REVIEW','GENERAL'];\nconst intentMatch = raw.match(/INTENT:([A-Z_]+)/);\nconst confidenceMatch = raw.match(/CONFIDENCE:([0-9.]+)/);\nconst parsedIntent = intentMatch ? intentMatch[1].toUpperCase() : 'GENERAL';\nconst confidence = confidenceMatch ? parseFloat(confidenceMatch[1]) : 0.8;\nconst rawIntent = validIntents.includes(parsedIntent) ? parsedIntent : 'GENERAL';\nlet resolvedIntent = (confidence >= 0.3) ? rawIntent : 'GENERAL';\nif (/https?:\\/\\/(www\\.)?linkedin\\.com\\/in\\//i.test(msg)) resolvedIntent = 'LINKEDIN_HELP';\nif (/https?:\\/\\/(www\\.)?github\\.com\\//i.test(msg)) resolvedIntent = 'GITHUB_REVIEW';\nif (/find|job search|search.*job|naukri|vacancy|fresher job|analyst job|hiring/.test(msg) && !/tailor|customize|specific job|this job|this role/.test(msg)) resolvedIntent = 'FIND_JOB';\nif (/resume|cv|rewrite|ats|my background|here is my|analyse my/.test(msg) && !/tailor|customize|specific|this job|this jd|for this role|keyword/.test(msg)) resolvedIntent = 'UPLOAD_RESUME';\nif (/skill.?gap|what.*learn|roadmap|missing skill|upskill/.test(msg)) resolvedIntent = 'SKILL_GAP';\nif (/cover letter/.test(msg)) resolvedIntent = 'COVER_LETTER';\nif (/cold email|recruiter email/.test(msg)) resolvedIntent = 'NETWORKING_MSG';\nif (/salary|ctc|package|negotiate|hike|lpa|pay/.test(msg)) resolvedIntent = 'SALARY_ADVICE';\nif (/linkedin|headline|about section/.test(msg) && !/github/.test(msg)) resolvedIntent = 'LINKEDIN_HELP';\nif (/github|repo|portfolio review/.test(msg)) resolvedIntent = 'GITHUB_REVIEW';\nif (/\\bapply\\b|submit application/.test(msg)) resolvedIntent = 'APPLY_JOB';\nif (/tracker|my applications|application status/.test(msg)) resolvedIntent = 'TRACKER_STATUS';\nif (/career health|career dashboard|career score|career iq|score me/.test(msg)) resolvedIntent = 'CAREER_DASHBOARD';\nif (/job match|match.*resume|resume.*match|how.*fit/.test(msg)) resolvedIntent = 'MATCH_SCORE';\nif (/hiring probability|chance.*hired|will i get|shortlist.*chance/.test(msg)) resolvedIntent = 'MATCH_SCORE';\nif (/mock interview|practice interview|simulate interview|interview me/.test(msg)) resolvedIntent = 'MOCK_INTERVIEW';\nif (/tailor.*resume|customize.*resume|rewrite.*for.*job|resume.*for.*jd/.test(msg)) resolvedIntent = 'RESUME_OPTIMISE';\nif (/research.*company|company.*culture|interview.*process.*at|tell.*about.*company/.test(msg)) resolvedIntent = 'COMPANY_RESEARCH';\nif (/inject.*keyword|add.*keyword|keyword.*resume|ats.*keyword/.test(msg)) resolvedIntent = 'RESUME_OPTIMISE';\nif (/networking.*message|connection.*message|referral.*email|reach.*out.*to/.test(msg)) resolvedIntent = 'NETWORKING_MSG';\nif (/compare.*offer|offer.*comparison|which.*offer|two.*offer/.test(msg)) resolvedIntent = 'OFFER_COMPARE';\nif (/career.*pivot|career.*change|career.*switch|transition.*to|change.*field/.test(msg)) resolvedIntent = 'CAREER_PIVOT';\nif (/30.*day.*plan|job.*sprint|daily.*plan|action.*plan|job.*search.*plan/.test(msg)) resolvedIntent = 'JOB_SPRINT';\nif (/interview.*question|prep.*interview|15.*q|technical.*question/.test(msg) && !/mock|practice|simulate|interview me/.test(msg)) resolvedIntent = 'INTERVIEW_PREP';\nif (/https?:\\/\\/(www\\.)?linkedin\\.com\\/in\\//i.test(msg)) resolvedIntent = 'LINKEDIN_HELP';\nif (/https?:\\/\\/(www\\.)?github\\.com\\//i.test(msg)) resolvedIntent = 'GITHUB_REVIEW';\nreturn [{ json: { userMessage: prev.userMessage, sessionId: prev.sessionId, ts: prev.ts, intent: resolvedIntent, rawIntent, confidence } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -544,
+        768
+      ],
+      "id": "e383d830-846c-455f-8097-ed3ffb01bbd7",
+      "name": "Resolve_Intent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are a career assistant intent classifier. Output ONLY: INTENT:[intent] CONFIDENCE:[0.0-1.0]\n\nINTENTS: FIND_JOB | UPLOAD_RESUME | SKILL_GAP | INTERVIEW_PREP | MOCK_INTERVIEW | SALARY_ADVICE | LINKEDIN_HELP | GITHUB_REVIEW | APPLY_JOB | TRACKER_STATUS | CAREER_DASHBOARD | MATCH_SCORE | RESUME_OPTIMISE | COMPANY_RESEARCH | NETWORKING_MSG | OFFER_COMPARE | CAREER_PIVOT | JOB_SPRINT | COVER_LETTER | GENERAL\n\nKEY RULES:\n- LinkedIn URL = LINKEDIN_HELP 0.99\n- GitHub URL = GITHUB_REVIEW 0.99\n- \"mock interview\", \"interview me\" = MOCK_INTERVIEW 0.99\n- \"tailor resume\", \"rewrite for this JD\" = RESUME_OPTIMISE 0.99\n- \"research company\", \"tell me about [company]\" = COMPANY_RESEARCH 0.99\n- \"inject keywords\", \"ats keywords\" = RESUME_OPTIMISE 0.99\n- \"connection message\", \"referral email\" = NETWORKING_MSG 0.99\n- \"compare offers\", \"which offer\" = OFFER_COMPARE 0.99\n- \"career change\", \"career pivot\" = CAREER_PIVOT 0.99\n- \"30 day plan\", \"job sprint\" = JOB_SPRINT 0.99\n- \"cover letter\", \"write cover\" = COVER_LETTER 0.99\n\nOutput ONLY the format. Nothing else."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -832,
+        768
+      ],
+      "id": "d7861dc2-10f8-4459-9f96-49900686bed7",
+      "name": "Detect_Intent_Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -832,
+        928
+      ],
+      "id": "34dacc72-c59e-4aaa-b431-3f0b5e540b50",
+      "name": "Groq_Intent",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "groqApi": {
+          "id": "QEgne3TSjiKAXy8s",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const extracted = ($input.first().json.text || '').trim();\nconst prev = $('Read_Message').first().json;\nif (!extracted || extracted.length < 80) {\n  return [{ json: { userMessage: 'Could not extract text from PDF. Please paste your resume as plain text.', sessionId: prev.sessionId, ts: prev.ts, intent: 'GENERAL', pdfError: true } }];\n}\nconst wordCount = extracted.split(/\\s+/).filter(Boolean).length;\nconst prompt = `I uploaded my resume PDF (${wordCount} words):\\n\\n${extracted}\\n\\nPlease run a full ATS audit and rewrite it completely.`;\nreturn [{ json: { userMessage: prompt, sessionId: prev.sessionId, ts: prev.ts, intent: 'UPLOAD_RESUME', resumeText: extracted, wordCount, sourceType: 'pdf' } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -544,
+        608
+      ],
+      "id": "b2b9ae29-7729-49ef-af9f-06727de9f722",
+      "name": "Prepare_PDF_Resume"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "={{ $('Read_Message').first().json.pdfKey || 'data' }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -832,
+        608
+      ],
+      "id": "32ce2d0d-4e82-4cd0-bdf3-beb08896327c",
+      "name": "Extract_PDF_Text"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "pdf-check-condition-001",
+              "leftValue": "={{ $json.hasPDF }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1136,
+        768
+      ],
+      "id": "f49031e0-4d70-4eac-9563-206fd031586e",
+      "name": "Check_PDF"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst sessionId = item.json.sessionId || item.json.body?.sessionId || ('sess_' + Date.now());\nconst body = item.json.body || item.json;\nconst msg = (body.chatInput || body.message || body.input || body.text || '').trim();\nconst binary = item.binary || {};\nconst binKeys = Object.keys(binary);\nconst pdfKey = binKeys.find(k => binary[k]?.mimeType === 'application/pdf' || (binary[k]?.fileName || '').toLowerCase().endsWith('.pdf')) || null;\nconst hasPDF = !!pdfKey;\nconst output = { json: { userMessage: msg || (hasPDF ? 'Analyze my resume PDF' : 'Hello'), sessionId, ts: new Date().toISOString(), hasPDF, pdfKey } };\nif (hasPDF) output.binary = binary;\nreturn [output];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1440,
+        768
+      ],
+      "id": "d09ec07b-d63d-45c5-a2c3-5e97e8676ea0",
+      "name": "Read_Message"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        560
+      ],
+      "id": "b6ea06e0-bf09-47c6-8eb1-28798146844e",
+      "name": "Wait_Resume",
+      "webhookId": "591f2321-8383-47f8-8576-1d14df512cc6"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        960
+      ],
+      "id": "216bd34d-4242-42e9-a514-5bfba52cfb08",
+      "name": "Wait_SkillGap",
+      "webhookId": "719c5f70-0107-498a-adb4-a82c5bb3686c"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        4560
+      ],
+      "id": "645d0a8c-59b5-4ba6-9ef6-13c3caba50c7",
+      "name": "Wait_Dashboard",
+      "webhookId": "e02dc504-1882-4cdb-a19d-911d4d42314e"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        4960
+      ],
+      "id": "238f2a63-0c6c-402e-bab5-37eafaeda103",
+      "name": "Wait_JobMatch",
+      "webhookId": "25bf5cdc-75a3-4ac2-a3e2-0486432cd1ba"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        6160
+      ],
+      "id": "dcb80e7a-efae-46bf-a7f0-59f296a5527e",
+      "name": "Wait_MockInterview",
+      "webhookId": "e020b18f-d49f-4e98-b80b-5c5ce976b313"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        6560
+      ],
+      "id": "9b11a2c5-240e-4df3-8857-96ecc1de8352",
+      "name": "Wait_ResumeTailor",
+      "webhookId": "d4660b33-a92d-47a2-abcd-4f6d43fca98c"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        6960
+      ],
+      "id": "64e4cb4f-806d-470c-9b2d-f92ecd9b047b",
+      "name": "Wait_CompanyResearch",
+      "webhookId": "457e3c87-b435-49d6-b8c9-9fa70268f65d"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        8160
+      ],
+      "id": "9fbdad47-fd16-42cc-a0c4-752010be1a40",
+      "name": "Wait_OfferCompare",
+      "webhookId": "84fe5068-33cc-4c9b-a22b-bd31d818b28a"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        8560
+      ],
+      "id": "5cd4c288-fe35-4129-a99c-f62aaf3a3103",
+      "name": "Wait_CareerPivot",
+      "webhookId": "f8cbe18b-1100-49f1-8795-b74006253d5f"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        8960
+      ],
+      "id": "00b86bf5-4e2c-4bb2-be29-837bdac3184b",
+      "name": "Wait_JobSprint",
+      "webhookId": "b5aaec19-1b55-4c24-b381-239c4eb1e44d"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        1360
+      ],
+      "id": "e67555f7-db05-4a24-b22e-5c9e22311bc2",
+      "name": "Wait_CoverLetter",
+      "webhookId": "a52ab9f6-6a69-4139-ae43-7945ab7edb96"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        1760
+      ],
+      "id": "f029b39c-f180-409a-834f-4d515b6a06cc",
+      "name": "Wait_InterviewPrep",
+      "webhookId": "38ea1169-7b01-4a96-bd16-9c1bfa4aee9b"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        2560
+      ],
+      "id": "e58065bc-ed6a-4b49-8484-b335ea9b63c7",
+      "name": "Wait_Salary",
+      "webhookId": "ac30cb24-c629-4165-b537-29e8644d6d94"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        2960
+      ],
+      "id": "1acf7956-bf94-49c6-8354-6f94a17b1db1",
+      "name": "Wait_LinkedIn",
+      "webhookId": "f66d23ac-d5e9-4001-9ed0-697888fe0de4"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        5760
+      ],
+      "id": "ae1e90cc-daa0-4732-a3f2-d9d5fee34f2a",
+      "name": "Wait_GitHub",
+      "webhookId": "66bae8ef-217a-42a5-9af5-d71f63113415"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        160
+      ],
+      "id": "ce50a1cb-82e0-493d-8509-a18bf29e6ee0",
+      "name": "Wait_FindJob",
+      "webhookId": "4f8e1c2a-9b3d-4e7f-a5c6-8d2b1e9f3047"
+    },
+    {
+      "parameters": {
+        "jsCode": "const scraped = $input.first().json;\nconst prev = $('Read_Message').first().json;\nif (!scraped || scraped.error || (!scraped.firstName && !scraped.fullName && !scraped.headline)) {\n  return [{ json: { userMessage: prev.userMessage + '\\n\\n[Note: Could not scrape LinkedIn automatically. Please paste your profile highlights.]', sessionId: prev.sessionId, ts: prev.ts } }];\n}\nfunction safe(v) { return v ? String(v).trim() : ''; }\nconst name = safe(scraped.fullName || ((scraped.firstName||'') + ' ' + (scraped.lastName||'')));\nconst headline = safe(scraped.headline);\nconst about = safe(scraped.about || scraped.summary);\nconst location = safe(scraped.location);\nconst exp = (scraped.experience || []).slice(0,5).map(e => `${safe(e.title)} at ${safe(e.companyName||e.company)} (${safe(e.duration||e.dateRange||'')})`).join('\\n');\nconst edu = (scraped.education || []).slice(0,3).map(e => `${safe(e.schoolName||e.school)} — ${safe(e.degree||'')} (${safe(e.dateRange||'')})`).join('\\n');\nconst skills = (scraped.skills||[]).slice(0,20).map(s=>safe(s.name||s)).filter(Boolean).join(', ');\nconst block = `SCRAPED LINKEDIN\\nName: ${name}\\nHeadline: ${headline}\\nLocation: ${location}\\nAbout: ${about||'(empty)'}\\nExperience:\\n${exp||'(none)'}\\nEducation:\\n${edu||'(none)'}\\nSkills: ${skills||'(none)'}`;\nreturn [{ json: { userMessage: `${prev.userMessage}\\n\\n${block}`, sessionId: prev.sessionId, ts: prev.ts } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1264,
+        2848
+      ],
+      "id": "db96310d-3a7d-41dd-a6bf-dd55e9c11af5",
+      "name": "Prepare_LinkedIn_Profile_Data"
+    },
+    {
+      "parameters": {
+        "operation": "Run actor and get dataset",
+        "actorSource": "store",
+        "actorId": {
+          "__rl": true,
+          "value": "https://console.apify.com/actors/LpVuK3Zozwuipa5bp/input",
+          "mode": "url"
+        },
+        "customBody": "={\n    \"profileScraperMode\": \"Profile details + email search ($10 per 1k)\",\n    \"queries\": [\n        \"{{ $json.linkedinUrl }}\",\n        \"{{ $json.linkedinUrl }}\"\n    ]\n}"
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        960,
+        2848
+      ],
+      "id": "46fa2468-6861-47ce-b12f-96dccc4904ae",
+      "name": "Apify_LinkedIn_Profile",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 4000,
+      "credentials": {
+        "apifyApi": {
+          "id": "eF9SwlagTsL6m1Jq",
+          "name": "Apify account 2"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "li-check-001",
+              "leftValue": "={{ $json.hasUrl }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        656,
+        2960
+      ],
+      "id": "90973e3d-3d7f-4740-871f-1072836017e1",
+      "name": "Check_Has_LinkedIn_URL"
+    },
+    {
+      "parameters": {
+        "jsCode": "const prev = $json;\nconst msg = (prev.userMessage || '');\nconst liMatch = msg.match(/https?:\\/\\/(www\\.)?linkedin\\.com\\/in\\/([a-zA-Z0-9\\-_%]+)\\/?/i);\nconst linkedinUrl = liMatch ? liMatch[0].replace(/\\/$/, '') : null;\nreturn [{ json: { userMessage: prev.userMessage, sessionId: prev.sessionId, ts: prev.ts, linkedinUrl, hasUrl: !!linkedinUrl } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        2960
+      ],
+      "id": "1d80b798-4701-44c2-a2bc-375e873370f1",
+      "name": "Extract_LinkedIn_URL"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1024,
+        160
+      ],
+      "id": "b652da82-a768-4ba5-91be-6d14fca35119",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "model": "mistral-large-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        448,
+        752
+      ],
+      "id": "cf9e5f73-cc34-4d7d-957e-d94c18835d16",
+      "name": "Mistral_Resume",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "sFlEzgHvKV9sOkUh",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "mistral-large-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        672,
+        1232
+      ],
+      "id": "5f902d81-00cc-4a9e-bc3c-a5e8e140ddc6",
+      "name": "Mistral_SkillGap",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "sFlEzgHvKV9sOkUh",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "mistral-large-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        704,
+        4784
+      ],
+      "id": "c8baa1ec-64ee-4906-8b06-933f6d2286a6",
+      "name": "Mistral_Dashboard",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "sFlEzgHvKV9sOkUh",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "mistral-large-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        640,
+        6400
+      ],
+      "id": "195577e7-cec1-4b1d-801e-32daf9175b68",
+      "name": "Mistral_MockInterview",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "sFlEzgHvKV9sOkUh",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "mistral-large-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        656,
+        6784
+      ],
+      "id": "7fe0b253-e6d3-4e6a-aeb2-0644fd4712f0",
+      "name": "Mistral_ResumeOptimise",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "sFlEzgHvKV9sOkUh",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "ministral-3b-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        672,
+        7168
+      ],
+      "id": "3f1713ad-3c61-458b-85dd-e12f20d5e32f",
+      "name": "Mistral_CompanyResearch",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "sFlEzgHvKV9sOkUh",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "mistral-small-2506",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        672,
+        8768
+      ],
+      "id": "f856c9bc-1139-4fac-ba33-fc16f18826fb",
+      "name": "Mistral_CareerPivot",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "sFlEzgHvKV9sOkUh",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "mistral-small-2506",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        656,
+        9200
+      ],
+      "id": "e9ecb6bd-6e7a-413e-ac49-fce976672843",
+      "name": "Mistral_JobSprint",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "sFlEzgHvKV9sOkUh",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Job Match & Hiring Probability Engine for India 2025-2026.\n\nIf resume or JD missing, ask for both.\n\nOutput IMMEDIATELY:\n\n━━━ JOB MATCH ━━━\nRole | Company | Overall % | Skills % | Experience % | Keywords % | ATS % | SHORTLIST: X%\nMatching ✓ [list] | Missing ✗ [list HIGH/MED/LOW]\nKeyword gaps: Present X/total | Missing | Phrases to insert\nResume fixes: Add to summary | Rewrite bullet | Add skill\nVerdict: [Apply? What to fix first?]\n\n━━━ HIRING PROBABILITY ━━━\nShortlist % | Technical % | HR % | Offer % | OVERALL: X%\nResume X/30 | Skills X/25 | Projects X/20 | Communication X/15 | Market X/10\nRecruiter view (6 sec): First impression | Shortlist: YES/NO/MAYBE | Top concern | Ghost risk\nBy company type: Startup | Mid-size IT | MNC | Product (each X% + reason)\nImprovements: +X% if add [skill] | +X% if build [project]\n\nNo emoji. MEMORY RULE: Never ask for info already provided."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        4960
+      ],
+      "id": "d7713dd1-fcce-4437-a9ab-92d53de8a6f1",
+      "name": "MatchScore_Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Resume Optimisation Engine for India 2025-2026.\n\nIf resume or JD missing, ask for both.\n\nOutput IMMEDIATELY:\n\n━━━ KEYWORD AUDIT ━━━\nTotal JD keywords | Present | Missing Critical (HIGH/MED) | Nice-to-have\n\n━━━ INJECTION MAP ━━━\nFor each critical keyword — BEFORE: [sentence] → AFTER: [rewritten sentence]\n\n━━━ TAILORED RESUME ━━━\nTarget Role | Match before→after X%\n[Complete ATS-optimised rewrite for this specific JD]\nChanges: Summary | Skills | Bullets rewritten\n\n━━━ ATS PREDICTION ━━━\nBefore X% → After X% | Shortlist probability X%\n\nRules: Mirror JD keywords naturally. Real numbers only. No emoji. MEMORY RULE: Never ask for info already provided."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        6560
+      ],
+      "id": "e9d414f1-3397-4826-9cf3-f0cf057e84f9",
+      "name": "ResumeOptimise_Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "You are CareerForge AI Application Specialist for India 2025-2026.\n\nWrite all application materials immediately using any company fact provided.\n\nOutput:\n\n━━━ COVER LETTER ━━━\n[Sender Name if known, else leave blank]\n[City, India]\n[Date: auto]\n\nHiring Manager / Recruiter\n[Company Name]\n[City]\n\nSubject: Application for [Role] at [Company]\n\nDear Hiring Manager,\n\nOpening paragraph (3-4 sentences): Strong hook using company-specific fact if available. State the role and your top qualification.\n\nBody paragraph 1 (4-5 sentences): 2-3 specific achievements with numbers. Quantify impact. Relate directly to the role requirements.\n\nBody paragraph 2 (3-4 sentences): Why this company specifically. Show research. Cultural fit or mission alignment.\n\nClosing paragraph (3 sentences): Express enthusiasm. Request interview. Professional CTA.\n\nYours sincerely,\n[Name]\n[Phone] | [Email] | [LinkedIn if mentioned]\n\n━━━ TAILORED RESUME SUMMARY ━━━\n[3-line ATS-optimised summary targeting this specific role and company]\n\n━━━ APPLICATION EMAIL ━━━\nSubject: [subject]\n[Email body ≤150 words — professional, direct, attach resume CTA]\n\n━━━ FOLLOW-UP EMAIL ━━━\nSubject: [subject]\n[Follow-up after 5 days — brief, polite, restate value]\n\n━━━ OPENING LINE ALTERNATIVES ━━━\n• [High impact version]\n• [Medium impact version]\n• [Conservative version]\n\n━━━ WHAT TO AVOID ━━━\n• [Mistake 1]\n• [Mistake 2]\n\nNo emoji. Write the full cover letter — minimum 350 words. MEMORY RULE: Never ask for info already provided."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1088,
+        3408
+      ],
+      "id": "8902d47b-97ce-404b-bbaa-bff4be2cc7fc",
+      "name": "Application_Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "const resumeText = ($input.first().json.output || '').trim();\nconst sessionId = $('Read_Message').first().json.sessionId;\n\nfunction toHtml(text) {\n  return text.split('\\n').map(line => {\n    const t = line.trim();\n    if (!t) return '<div style=\"margin:5px 0\"></div>';\n    if (/^━+/.test(t)) {\n      const label = t.replace(/━/g, '').trim();\n      return `<h2 style=\"font-size:11px;font-weight:bold;border-bottom:1.5px solid #555;margin:14px 0 4px;padding-bottom:3px;text-transform:uppercase;letter-spacing:0.8px\">${label}</h2>`;\n    }\n    if (t.startsWith('•') || t.startsWith('-')) {\n      return `<div style=\"margin:2px 0 2px 14px;font-size:10.5px;line-height:1.5\">${t}</div>`;\n    }\n    return `<p style=\"margin:2px 0;font-size:10.5px;line-height:1.6\">${t}</p>`;\n  }).join('');\n}\n\nconst resumeHtml = `<!DOCTYPE html><html><head><meta charset=\"UTF-8\">\n<style>@page{margin:18mm 16mm}body{font-family:Arial,Helvetica,sans-serif;color:#1a1a1a}</style>\n</head><body>${toHtml(resumeText)}</body></html>`;\n\nreturn [{ json: { output: resumeText, resumeHtml, sessionId } }];"
+      },
+      "id": "56748baa-37eb-41bf-87bf-14ea00ab206b",
+      "name": "DOCX_Export",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.html2pdf.app/v1/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "resumePdf"
+            }
+          },
+          "timeout": 30000
+        }
+      },
+      "id": "9c69e6d7-c152-4ae9-aa12-b15dddbd022e",
+      "name": "Resume_PDF_Convert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1168,
+        560
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const prev = $('DOCX_Export').first();\nconst resumeText = prev.json.output || '';\nconst sessionId = prev.json.sessionId || '';\nlet pdfBase64 = null, pdfAvailable = false;\ntry {\n  const bd = $input.first().binary?.resumePdf;\n  if (bd?.data) { pdfBase64 = bd.data; pdfAvailable = true; }\n} catch(e) {}\nreturn [{ json: { output: resumeText, pdfBase64, pdfFilename: 'CareerForge_Resume.pdf', pdfAvailable, sessionId } }];"
+      },
+      "id": "e0d434cf-2956-4e06-98d7-f93b7ff8ce89",
+      "name": "Set_Resume_Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const agentOutput = ($input.first().json.output || '').trim();\nconst sessionId = $('Read_Message').first().json.sessionId;\n\n// Extract just the COVER LETTER section for the PDF\nconst clMatch = agentOutput.match(/━+\\s*COVER LETTER\\s*━+\\n([\\s\\S]*?)(?=━{3,}|$)/i);\nconst coverLetterText = clMatch ? clMatch[1].trim() : agentOutput;\n\n// Parse lines into structured HTML\nconst lines = coverLetterText.split('\\n').map(l => l.trim()).filter(l => l.length > 0);\n\nlet html = '';\nlet inBody = false;\n\nfor (let i = 0; i < lines.length; i++) {\n  const l = lines[i];\n  // Subject line\n  if (/^Subject:/i.test(l)) {\n    html += `<p style=\"margin:0 0 20px;font-size:11.5px;font-weight:bold\">${l}</p>`;\n    inBody = true;\n  }\n  // Dear / salutation\n  else if (/^Dear /i.test(l)) {\n    html += `<p style=\"margin:0 0 14px;font-size:11.5px\">${l}</p>`;\n  }\n  // Closing (Yours/Sincerely/Regards)\n  else if (/^(Yours|Sincerely|Regards|Best|Warm)/i.test(l)) {\n    html += `<p style=\"margin:18px 0 4px;font-size:11.5px\">${l}</p>`;\n  }\n  // Bullet points\n  else if (l.startsWith('•') || l.startsWith('-')) {\n    html += `<p style=\"margin:2px 0 2px 16px;font-size:11px;line-height:1.6\">${l}</p>`;\n  }\n  // Header lines (sender/recipient block — first few lines before Subject)\n  else if (!inBody && i < 8) {\n    html += `<p style=\"margin:0 0 3px;font-size:11px;color:#444\">${l}</p>`;\n  }\n  // Body paragraphs\n  else {\n    html += `<p style=\"margin:0 0 14px;font-size:11.5px;line-height:1.8;text-align:justify\">${l}</p>`;\n  }\n}\n\nconst coverLetterHtml = `<!DOCTYPE html>\n<html><head><meta charset=\"UTF-8\">\n<style>\n  @page { margin: 25mm 28mm }\n  body { font-family: Georgia, serif; color: #1a1a1a; }\n  .header-bar { border-bottom: 2px solid #1a1a1a; padding-bottom: 8px; margin-bottom: 24px; }\n  .brand { font-size: 9px; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }\n</style>\n</head><body>\n<div class=\"header-bar\">\n  <div class=\"brand\">Generated by CareerForge AI</div>\n</div>\n${html}\n</body></html>`;\n\nreturn [{ json: { output: agentOutput, coverLetterHtml, sessionId } }];"
+      },
+      "id": "2282c5f7-dbb7-4531-b4d1-912d24e2ceb1",
+      "name": "Generate_CoverLetter_PDF",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        3408
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.html2pdf.app/v1/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "coverLetterPdf"
+            }
+          },
+          "timeout": 30000
+        }
+      },
+      "id": "f6f011c8-9f69-46ec-a2e5-e102683923ed",
+      "name": "CoverLetter_PDF_Convert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1536,
+        3408
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const prev = $('Generate_CoverLetter_PDF').first();\nconst fullOutput = prev.json.output || '';\nconst sessionId = prev.json.sessionId || '';\nlet pdfBase64 = null, pdfAvailable = false;\ntry {\n  const bd = $input.first().binary?.coverLetterPdf;\n  if (bd?.data) { pdfBase64 = bd.data; pdfAvailable = true; }\n} catch(e) {}\nreturn [{ json: { output: fullOutput, pdfBase64, pdfFilename: 'CareerForge_CoverLetter.pdf', pdfAvailable, sessionId } }];"
+      },
+      "id": "016842ea-e796-49f5-8e06-b2ffaa50dc77",
+      "name": "Set_CoverLetter_Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1744,
+        3408
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "connection": "keep-alive",
+            "content-length": "2527",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+            "sec-ch-ua": "\"Google Chrome\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+            "content-type": "application/json",
+            "sec-ch-ua-mobile": "?0",
+            "accept": "*/*",
+            "origin": "null",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-dest": "empty",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-IN,en;q=0.9,mr-IN;q=0.8,mr;q=0.7,en-GB;q=0.6,en-US;q=0.5,hi;q=0.4"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "chatInput": "COMPANY RESEARCH REPORT for swiggy:\n\nRole I am targeting: data analyst (fresher)\nFocus areas: Interview Process, Salary Benchmarks, Culture & Work-Life, Red Flags, Personalized Pitch\nMy background: Detail-oriented and analytical final-year Computer Engineering student (DBATU, 2026) seeking a Data Analyst\ninternship. Skilled in collecting, cleaning, and analyzing data from multiple sources to identify trends, patterns, and\nactionable insights. Proficient in Python (Pandas, NumPy, Matplotlib, Seaborn), SQL (MySQL), Power BI, and Excel for\nend-to-end reporting and dashboard creation. Strong background in data accuracy, data integrity, KPI monitoring, and\npresenting findings clearly to stakeholders. Collaborative team player with leadership experience managing\ncross-functional initiatives.\n\nPlease provide a complete report covering:\n1. Interview process at swiggy — rounds, format, what they test, typical timeline\n2. Salary benchmarks for data analyst at swiggy (freshers and experienced)\n3. Culture, work-life balance, management style — honest assessment\n4. Recent news, growth plans, red flags\n5. My personalized pitch to stand out\n6. 5 smart questions to ask the interviewer",
+            "message": "COMPANY RESEARCH REPORT for swiggy:\n\nRole I am targeting: data analyst (fresher)\nFocus areas: Interview Process, Salary Benchmarks, Culture & Work-Life, Red Flags, Personalized Pitch\nMy background: Detail-oriented and analytical final-year Computer Engineering student (DBATU, 2026) seeking a Data Analyst\ninternship. Skilled in collecting, cleaning, and analyzing data from multiple sources to identify trends, patterns, and\nactionable insights. Proficient in Python (Pandas, NumPy, Matplotlib, Seaborn), SQL (MySQL), Power BI, and Excel for\nend-to-end reporting and dashboard creation. Strong background in data accuracy, data integrity, KPI monitoring, and\npresenting findings clearly to stakeholders. Collaborative team player with leadership experience managing\ncross-functional initiatives.\n\nPlease provide a complete report covering:\n1. Interview process at swiggy — rounds, format, what they test, typical timeline\n2. Salary benchmarks for data analyst at swiggy (freshers and experienced)\n3. Culture, work-life balance, management style — honest assessment\n4. Recent news, growth plans, red flags\n5. My personalized pitch to stand out\n6. 5 smart questions to ask the interviewer",
+            "sessionId": "sess_1781087932031",
+            "userName": "sid",
+            "ts": "2026-06-10T18:00:27.773Z"
+          },
+          "webhookUrl": "http://localhost:5678/webhook/jobpilot",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Memory_Shared": {
+      "ai_memory": [
+        [
+          {
+            "node": "Format_Jobs",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "JobSprint_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "CareerPivot_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "OfferCompare_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "ResumeOptimise_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "CompanyResearch_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "MockInterview_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "GitHub_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "MatchScore_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Dashboard_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "SkillGap_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Application_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "LinkedIn_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Salary_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Interview_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Resume_Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Detect_Intent_Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JobSprint_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CareerPivot_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OfferCompare_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq_OfferCompare": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "OfferCompare_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CompanyResearch_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MockInterview_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare_GitHub_Data": {
+      "main": [
+        [
+          {
+            "node": "GitHub_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub_Repos_API": {
+      "main": [
+        [
+          {
+            "node": "Prepare_GitHub_Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub_Profile_API": {
+      "main": [
+        [
+          {
+            "node": "Prepare_GitHub_Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract_GitHub_URL": {
+      "main": [
+        [
+          {
+            "node": "Check_Has_GitHub_URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare_LinkedIn_Profile_Data": {
+      "main": [
+        [
+          {
+            "node": "LinkedIn_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify_LinkedIn_Profile": {
+      "main": [
+        [
+          {
+            "node": "Prepare_LinkedIn_Profile_Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check_Has_LinkedIn_URL": {
+      "main": [
+        [
+          {
+            "node": "Apify_LinkedIn_Profile",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LinkedIn_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract_LinkedIn_URL": {
+      "main": [
+        [
+          {
+            "node": "Check_Has_LinkedIn_URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq_GitHub": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "GitHub_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check_Has_GitHub_URL": {
+      "main": [
+        [
+          {
+            "node": "GitHub_Profile_API",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GitHub_Repos_API",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GitHub_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq_JobMatch": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "MatchScore_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dashboard_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set_Output": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Read_Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify_LinkedIn": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Extract_Job_Params_LinkedIn": {
+      "main": [
+        [
+          {
+            "node": "Apify_LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract_Job_Params_Naukri": {
+      "main": [
+        [
+          {
+            "node": "Apify_Naukri",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SkillGap_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq_Apply": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Application_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedIn_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq_LinkedIn": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "LinkedIn_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salary_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq_Salary": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Salary_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Interview_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq_Interview": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Interview_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse_JD": {
+      "main": [
+        [
+          {
+            "node": "Interview_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Company_Research": {
+      "main": [
+        [
+          {
+            "node": "Prepare_Company_Fact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DOCX_Export": {
+      "main": [
+        [
+          {
+            "node": "Resume_PDF_Convert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resume_Agent": {
+      "main": [
+        [
+          {
+            "node": "DOCX_Export",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format_Jobs": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq_Search": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Format_Jobs",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score_Rank_Jobs": {
+      "main": [
+        [
+          {
+            "node": "Format_Jobs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deduplicate_Jobs": {
+      "main": [
+        [
+          {
+            "node": "Score_Rank_Jobs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify_Naukri": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route_Intent": {
+      "main": [
+        [
+          {
+            "node": "Wait_FindJob",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_Resume",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_SkillGap",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_InterviewPrep",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_Salary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_Dashboard",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_JobMatch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_MockInterview",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_ResumeTailor",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_CompanyResearch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_OfferCompare",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_CareerPivot",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_JobSprint",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait_CoverLetter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resolve_Intent": {
+      "main": [
+        [
+          {
+            "node": "Route_Intent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect_Intent_Agent": {
+      "main": [
+        [
+          {
+            "node": "Resolve_Intent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq_Intent": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Detect_Intent_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare_PDF_Resume": {
+      "main": [
+        [
+          {
+            "node": "Resume_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract_PDF_Text": {
+      "main": [
+        [
+          {
+            "node": "Prepare_PDF_Resume",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check_PDF": {
+      "main": [
+        [
+          {
+            "node": "Extract_PDF_Text",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Detect_Intent_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read_Message": {
+      "main": [
+        [
+          {
+            "node": "Check_PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_Resume": {
+      "main": [
+        [
+          {
+            "node": "Resume_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_SkillGap": {
+      "main": [
+        [
+          {
+            "node": "SkillGap_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_Dashboard": {
+      "main": [
+        [
+          {
+            "node": "Dashboard_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_JobMatch": {
+      "main": [
+        [
+          {
+            "node": "MatchScore_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_MockInterview": {
+      "main": [
+        [
+          {
+            "node": "MockInterview_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_ResumeTailor": {
+      "main": [
+        [
+          {
+            "node": "ResumeOptimise_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_CompanyResearch": {
+      "main": [
+        [
+          {
+            "node": "CompanyResearch_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_OfferCompare": {
+      "main": [
+        [
+          {
+            "node": "OfferCompare_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_CareerPivot": {
+      "main": [
+        [
+          {
+            "node": "CareerPivot_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_JobSprint": {
+      "main": [
+        [
+          {
+            "node": "JobSprint_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_CoverLetter": {
+      "main": [
+        [
+          {
+            "node": "Company_Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_InterviewPrep": {
+      "main": [
+        [
+          {
+            "node": "Parse_JD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_Salary": {
+      "main": [
+        [
+          {
+            "node": "Salary_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_LinkedIn": {
+      "main": [
+        [
+          {
+            "node": "Extract_LinkedIn_URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_GitHub": {
+      "main": [
+        [
+          {
+            "node": "Extract_GitHub_URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait_FindJob": {
+      "main": [
+        [
+          {
+            "node": "Extract_Job_Params_LinkedIn",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Extract_Job_Params_Naukri",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Deduplicate_Jobs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral_Resume": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Resume_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral_SkillGap": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "SkillGap_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare_Company_Fact": {
+      "main": [
+        [
+          {
+            "node": "Application_Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral_Dashboard": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Dashboard_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral_MockInterview": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "MockInterview_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral_ResumeOptimise": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "ResumeOptimise_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral_CompanyResearch": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "CompanyResearch_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral_CareerPivot": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "CareerPivot_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral_JobSprint": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "JobSprint_Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MatchScore_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ResumeOptimise_Agent": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Application_Agent": {
+      "main": [
+        [
+          {
+            "node": "Generate_CoverLetter_PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resume_PDF_Convert": {
+      "main": [
+        [
+          {
+            "node": "Set_Resume_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set_Resume_Output": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate_CoverLetter_PDF": {
+      "main": [
+        [
+          {
+            "node": "CoverLetter_PDF_Convert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CoverLetter_PDF_Convert": {
+      "main": [
+        [
+          {
+            "node": "Set_CoverLetter_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set_CoverLetter_Output": {
+      "main": [
+        [
+          {
+            "node": "Set_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "03a38a44-a898-4bc4-885f-61163f15eef6",
+  "meta": {
+    "instanceId": "f76523d4af4fac56e0c0989e15a0f0bcbe12e71aa3f35dcf6f62bdfeaa8d15d7"
+  },
+  "id": "8XeberAeKxCcz1EE",
+  "tags": []
+}
